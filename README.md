@@ -43,12 +43,4 @@ of the KS and AD quantiles. For this, it is sufficient to click on the
 link in the table below. Once you are in the MATLAB cloud environment,
 go under the "Add Ons section" of the "Home tab" and install FSDA. 
 
-<!---
-- R is used version X.X.X or higher
-- R packages: [list required packages]
---->
-
-<!---
-4. Install required R packages: `Rscript install_packages.R`
---->
 
