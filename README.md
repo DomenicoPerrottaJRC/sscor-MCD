@@ -5,9 +5,9 @@ Code to reproduce the figures of paper "Finite-sample calibration of robust cova
 
 ## Abstract
 The Minimum Covariance Determinant (MCD) estimator is one of the most widely used high-breakdown estimators of multivariate location and scatter. Its practical success relies on suitable corrections, which remove the asymptotic and small-sample biases introduced by trimming. While explicit consistency factors are available under the multivariate normal distribution and, more recently, under multivariate Student-$t$ models, these corrections only address the asymptotic behaviour of the estimator.
-%
+
 In the Gaussian case, \cite{pis+al:02} showed that the MCD also exhibits a non-negligible finite-sample bias, particularly for small sample sizes and relatively large dimensions. Such bias propagates to robust Mahalanobis distances and may affect subsequent procedures, including multivariate outlier detection and robust inference.
-%
+
 This paper investigates the finite-sample behaviour of the MCD estimator and of the related robust distances under multivariate Student-$t$ distributions, a potentially relevant scenario in many application fields. Extensive Monte Carlo experiments are carried out over a broad range of sample sizes, dimensions, trimming levels and degrees of freedom. Based on these experiments, empirical correction factors are obtained and approximated by smooth functions of the sample size and trimming proportion, providing a computationally efficient calibration suitable for practical implementations to heavy-tailed data. The proposed corrections are developed and made available both for the scatter bias and the distance quantiles.
 
 ## Practical Impact: Unbiased Scatter Estimation and Accurate Outlier Testing
