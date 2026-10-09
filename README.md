@@ -4,15 +4,22 @@ Code to reproduce the figures of paper "Finite-sample calibration of robust cova
 > **Note:** This repository contains code and instructions for replicating the results of a paper currently under peer review. Author information is intentionally omitted.
 
 ## Abstract
-The Minimum Covariance Determinant (MCD) estimator is one of the most widely used high-breakdown estimators of multivariate location and scatter. Its practical success relies on suitable corrections, which remove the asymptotic and small-sample biases introduced by trimming. While explicit consistency factors are available under the multivariate normal distribution and, more recently, under multivariate Student-$t$ models, these corrections only address the asymptotic behaviour of the estimator.
-%
+The Minimum Covariance Determinant (MCD) estimator is one of the most widely used high-breakdown estimators of multivariate location and scatter. Its practical success relies on suitable corrections, which remove the asymptotic and small-sample biases introduced by trimming. While explicit consistency factors are available under the multivariate normal distribution and, more recently, under multivariate Student-t models, these corrections only address the asymptotic behaviour of the estimator.
+
 In the Gaussian case, \cite{pis+al:02} showed that the MCD also exhibits a non-negligible finite-sample bias, particularly for small sample sizes and relatively large dimensions. Such bias propagates to robust Mahalanobis distances and may affect subsequent procedures, including multivariate outlier detection and robust inference.
-%
-This paper investigates the finite-sample behaviour of the MCD estimator and of the related robust distances under multivariate Student-$t$ distributions, a potentially relevant scenario in many application fields. Extensive Monte Carlo experiments are carried out over a broad range of sample sizes, dimensions, trimming levels and degrees of freedom. Based on these experiments, empirical correction factors are obtained and approximated by smooth functions of the sample size and trimming proportion, providing a computationally efficient calibration suitable for practical implementations to heavy-tailed data. The proposed corrections are developed and made available both for the scatter bias and the distance quantiles.
+
+This paper investigates the finite-sample behaviour of the MCD estimator and of the related robust distances under multivariate Student-t distributions, a potentially relevant scenario in many application fields. Extensive Monte Carlo experiments are carried out over a broad range of sample sizes, dimensions, trimming levels and degrees of freedom. Based on these experiments, empirical correction factors are obtained and approximated by smooth functions of the sample size and trimming proportion, providing a computationally efficient calibration suitable for practical implementations to heavy-tailed data. The proposed corrections are developed and made available both for the scatter bias and the distance quantiles.
 
 ## Practical Impact: Unbiased Scatter Estimation and Accurate Outlier Testing
 
 In finite samples, asymptotic consistency corrections alone are insufficient: they underestimate scatter and render standard outlier tests overly liberal, resulting in substantial rates of false alarms on heavy-tailed data. To solve this, this repository delivers practical finite-sample tools that (i) remove the systematic bias in the MCD scatter matrix via determinant-based correction factors $\hat{\delta}_n$, and (ii) provide calibrated cutoffs for squared robust distances that strictly control the empirical false-positive rate. Through precomputed calibration tables and smooth interpolation functions, practitioners can instantly apply accurate corrections to any combination of sample size $n$, dimension $p$, degrees of freedom $\nu$, and trimming proportion $\alpha_0$ in real-time, eliminating the need for expensive simulation studies.
+
+## Key computational tasks
+
+There are two main scripts needed to replicate the simulations. 
+
+-  s01_mcdt_finite_sample_calibration.m runs the Monte Carlo simulation, estimates the determinant-bias corrections, calibrates the MCD robust-distance cutoff, evaluates empirical size, and writes the main calibration database. The script explicitly documents this simulation/calibration role and its split between calibration and independent evaluation samples.
+-  s02_mcdt_interpolation_analysis.m consumes the simulation results and performs the interpolation/approximation analysis for both $\hat\delta$ and $\kappa_{RD}^{\delta}$. In doing so, it compares three interpolation methods. 
 
 ## FSDA and other dependencies
 
