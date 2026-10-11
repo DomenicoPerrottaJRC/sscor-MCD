@@ -16,16 +16,22 @@
 %      calibrated threshold.
 %   5. Produces diagnostic plots (Distance Index Plot & Scatterplot Matrix).
 
+clear; clc; close all   % cleaning
 
-clear; clc; close all;
+seed = 20260711;     % Reproducibility
+projectRoot = pwd;   % Your project folder: results will be saved there
 
-datatype = 1; % 1 = Grass ; 2 = t ; 3 = S&P
+datatype = 1; % 1 = Grass ; 2 = t 
+
+%% Add the project folders to the MATLAB path 
+addpath(genpath(fullfile(projectRoot, 'src_srep')));
+addpath(genpath(fullfile(projectRoot, 'src_core')));
+addpath(genpath(fullfile(projectRoot, 'src_plots')));
 
 %% 1. Configuration and Paths
 ds_path      = './datasets';
 dsfile1      = 'Grass.prn';
-dsfile2      = 'Grass_original_contaminated.prn';
-interpFolder = './NEW/MCDt_all_interpolation_analysis_p3_nu8';
+interpFolder = './s1_s2_output/MCDt_all_interpolation_analysis_p3_nu8';
 
 % Model parameters (Barabesi et al., 2026)
 nu0      = 8;
@@ -70,11 +76,6 @@ if datatype == 2
     n0  = 100;
     rng(12345);
     X0 = trnd(nu0, n0, p0);
-end
-
-%% 2c. Financial from S&P
-if datatype == 3
-    dataset_SP500;
 end
 
 %% 3. Compute MCD on Uncontaminated Data
