@@ -64,7 +64,7 @@ clear; clc; close all   % cleaning
 
 seed = 20260711;     % Reproducibility
 useParfor   = true;  % Parallelization
-projectRoot = pwd;   % Your project folder: results will be saved there
+projectRoot = '.';   % Your project folder (codes run here)
 
 %% ========================================================================
 % SIMULATION SETTINGS
@@ -91,10 +91,10 @@ nu_vec      = [3,5,7];
 alpha0_vec  = 0.05:0.05:0.50;
 
 % Quick test override
-quickTest.n_vec      = [50:10:80];  % [50];
+quickTest.n_vec      = [60:20:80];  % [50];
 quickTest.p_vec      = [2,5];  % [2,5];
 quickTest.nu_vec     = [3,5];  % [3,5,7];
-quickTest.alpha0_vec = [0.10, 0.25, 0.5];  % [0.10, 0.25, 0.5];
+quickTest.alpha0_vec = [0.10, 0.5];  % [0.10, 0.25, 0.5];
 quickTest.B          = [20];  % 100;
 
 % Which pooled vs. avg comparison to show in diagnostics. 
@@ -115,8 +115,8 @@ plotPooledComparison = 'avg'; % 'avg' | 'pooled' | 'replicationwise' | 'all'
 q_method             = 'inclusive'; % 'inclusive' | 'exclusive' | 'midpoint' | 'approximate' | 'HarrellDavis'
 
 % Workflow options
-options.saveRawDatabase = true;
-options.saveDiagnostics = true;
+options.saveRawDatabase = true;  % save 
+options.saveDiagnostics = false; % save plots
 
 %% ========================================================================
 % BIAS_DET SETTINGS
@@ -150,16 +150,16 @@ VERIFY_BIASDET_CORRECTION = false;
 
 %% Add project folders to the path
 
-addpath(genpath(fullfile(projectRoot, 'src_srep')));
-addpath(genpath(fullfile(projectRoot, 'src_core')));
-addpath(genpath(fullfile(projectRoot, 'src_plots')));
+addpath(fullfile(projectRoot, 'src_srep'));
+addpath(fullfile(projectRoot, 'src_core'));
+addpath(fullfile(projectRoot, 'src_plots'));
 
 %% Storage and output files
 
 saveResults = true;
 
 if saveResults
-    resultsRoot = fullfile(projectRoot, 'REPLICABILITY_RESULTS');
+    resultsRoot = fullfile(projectRoot, 'out_s1s2s3');
     mkdir(resultsRoot);
 
     ts = datestr(now, 'yyyy-mm-dd_HHMMSS');

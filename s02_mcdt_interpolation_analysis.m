@@ -64,7 +64,7 @@
 clear; clc; close all   % cleaning
 
 seed = 20260711;     % Reproducibility
-projectRoot = pwd;   % Your project folder: results will be saved there
+projectRoot = '.';   % Your project folder (codes run here)
 
 %% ========================================================================
 % SIMULATION SETTINGS
@@ -74,7 +74,8 @@ projectRoot = pwd;   % Your project folder: results will be saved there
 %   'paper_all'    -> main paper output
 %   'paper_grass'  -> Grass-data variant
 %    otherwise     -> user selects the folder name directly
-calibration_results = 'paper_all'; 
+calibration_results = 'paper_grass'; 
+calibration_results = 'calibration_2026-10-13_190549';
 
 % Section 5.4 construction to analyse.
 % The mean-root version matches the main delta-hat table used in the paper.
@@ -110,12 +111,12 @@ plotAlpha0Values = [0.05 0.25 0.50];
 %
 % Add the project folders to the MATLAB path so the analysis can call the
 % simulation, core, and plotting helpers.
-addpath(genpath(fullfile(projectRoot, 'src_srep')));
-addpath(genpath(fullfile(projectRoot, 'src_core')));
-addpath(genpath(fullfile(projectRoot, 'src_plots')));
+addpath(fullfile(projectRoot, 'src_srep'));
+addpath(fullfile(projectRoot, 'src_core'));
+addpath(fullfile(projectRoot, 'src_plots'));
 
 % Root folder where all replicability outputs are stored.
-resultsRoot    = fullfile(projectRoot, 'REPLICABILITY_RESULTS');
+resultsRoot    = fullfile(projectRoot, 's1s2s3_out');
 
 % Timestamp used to create a unique output folder for a specific new run.
 ts             = datestr(now, 'yyyy-mm-dd_HHMMSS');
@@ -130,7 +131,7 @@ switch calibration_results
         outputRoot  = [resultsRoot filesep 'article' filesep 'MCDt_all_interpolation_analysis' '_' ts];
     case 'paper_grass'
         % This is used to cover the case of the Grass dataset
-        inputFolder = [resultsRoot filesep 'article' filesep 'Results_correction_p3_nu8_alpha0extended_2026-10-02'];
+        inputFolder = [resultsRoot filesep 'Results_correction_p3_nu8'];
         % The output root is separate from the simulation results
         outputRoot  = [resultsRoot filesep 'article' filesep 'MCDt_all_interpolation_analysis_p3_nu8' '_' ts];
     otherwise

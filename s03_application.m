@@ -19,14 +19,15 @@
 clear; clc; close all   % cleaning
 
 seed = 20260711;     % Reproducibility
-projectRoot = pwd;   % Your project folder: results will be saved there
+projectRoot = '.';   % Your project folder (codes run here)
 
 datatype = 1; % 1 = Grass ; 2 = t 
 
 %% Add the project folders to the MATLAB path 
-addpath(genpath(fullfile(projectRoot, 'src_srep')));
-addpath(genpath(fullfile(projectRoot, 'src_core')));
-addpath(genpath(fullfile(projectRoot, 'src_plots')));
+addpath(fullfile(projectRoot, 'src_srep'));
+addpath(fullfile(projectRoot, 'src_core'));
+addpath(fullfile(projectRoot, 'src_plots'));
+
 
 %% 1. Configuration and Paths
 ds_path      = './datasets';
